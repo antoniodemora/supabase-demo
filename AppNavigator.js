@@ -14,7 +14,7 @@ export default function AppNavigator() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen name="Login" component={LogInScreen} />
+                <Stack.Screen name="LogIn" component={LogInScreen} />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="CatEstados" component={CatEstadosScreen} />
             </Stack.Navigator>
