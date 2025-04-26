@@ -1,14 +1,42 @@
-import { useState } from "react";
-import { Button, Image, StyleSheet, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import {
+    Alert,
+    Button,
+    Image,
+    StyleSheet,
+    TextInput,
+    View
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { supabase } from "../lib/supabase";
 
 export default function LogInScreen({ navigation }) {
     const [email, setEmail] = useState();
     const [passwd, setPasswd] = useState();
+    const [loginError, setLoginError] = useState(null);
+    const [session, setSession] = useState(null);
 
-    function handleLogin() {
-        navigation.navigate("CatEstados");
-    }
+    useEffect(() => {
+        if (loginError) {
+            Alert.alert("error: " + loginError);
+        }
+        setLoginError(null);
+    }, [loginError]);
+
+    const handleLogin = async () => {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password: passwd
+        });
+
+        if (error) {
+            setLoginError(error.message);
+        } else {
+            setSession(data.session);
+            setLoginError(null);
+            navigation.navigate("CatEstados");
+        }
+    };
 
     function handleSignUp() {
         navigation.navigate("SignUp");
@@ -31,14 +59,14 @@ export default function LogInScreen({ navigation }) {
                     style={styles.input}
                     placeholder="email"
                     value={email}
-                    onChange={setEmail}
+                    onChangeText={(text) => setEmail(text)}
                     autoCapitalize="none"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="password"
                     value={passwd}
-                    onChange={setPasswd}
+                    onChangeText={(text) => setPasswd(text)}
                     secureTextEntry
                 />
                 <View style={styles.buttonContainer}>
@@ -53,7 +81,6 @@ export default function LogInScreen({ navigation }) {
                         style={styles.button}
                         onPress={handleLogin}
                     />
-                    {/*<View style={{ flex: 2 }}></View>*/}
                 </View>
             </View>
         </SafeAreaView>
