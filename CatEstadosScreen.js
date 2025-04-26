@@ -19,12 +19,6 @@ export default function CatEstadosScreen({ navigation }) {
     };
 
     const fetchStates = async () => {
-        // const { data, error } = await supabase
-        //     .from("mexican_states")
-        //     .select("*")
-        //     .order("name", { ascending: true });
-
-        // if (!error) setStates(data);
         setStates([
             { id: 1, name: "Aguascalientes" },
             { id: 2, name: "Baja California" },
@@ -62,27 +56,12 @@ export default function CatEstadosScreen({ navigation }) {
     };
 
     const addState = async () => {
-        // const user = supabase.auth.getUser();
-        // const { error } = await supabase
-        //     .from("mexican_states")
-        //     .insert([
-        //         { name: newState, created_by: (await user).data.user.id }
-        //     ]);
-        // if (!error) {
-        //     setNewState("");
-        //     fetchStates();
-        // }
         const newStateId = Math.max(...states.map((item) => item.id)) + 1;
         setStates([...states, { id: newStateId, name: newState }]);
         setNewState("");
     };
 
     const deleteState = async (id) => {
-        //   const { error } = await supabase
-        //       .from("mexican_states")
-        //       .delete()
-        //       .eq("id", id);
-        //   if (!error) fetchStates();
         const newStates = states.filter((item) => item.id != id);
         setStates(newStates);
     };
