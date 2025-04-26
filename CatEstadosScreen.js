@@ -72,7 +72,8 @@ export default function CatEstadosScreen({ navigation }) {
         //     setNewState("");
         //     fetchStates();
         // }
-        setStates([...states, { id: states.length + 1, name: newState }]); // TODO: Fix bug
+        const newStateId = Math.max(...states.map((item) => item.id)) + 1;
+        setStates([...states, { id: newStateId, name: newState }]);
         setNewState("");
     };
 
@@ -100,7 +101,7 @@ export default function CatEstadosScreen({ navigation }) {
                     <View style={styles.itemRow}>
                         <Text>{item.name}</Text>
                         <TouchableOpacity onPress={() => deleteState(item.id)}>
-                            <Text style={styles.delete}>Eliminar ❌</Text>
+                            <Text style={styles.delete}>❌</Text>
                         </TouchableOpacity>
                     </View>
                 )}
