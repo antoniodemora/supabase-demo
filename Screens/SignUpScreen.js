@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { supabase } from "../lib/supabase";
 
 export default function SignUpScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSignUp = () => {
-        alert("¡Revisa tu correo para confirmar tu cuenta!");
-        navigation.navigate("LogIn");
+    const handleSignUp = async () => {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) Alert.alert(error.message);
+        else {
+            Alert.alert("¡Revisa tu correo para confirmar tu cuenta!");
+            navigation.navigate("LogIn");
+        }
     };
     return (
         <View style={styles.container}>
@@ -17,6 +22,7 @@ export default function SignUpScreen({ navigation }) {
                 placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
+                autoCapitalize="none"
             />
             <TextInput
                 style={styles.input}
