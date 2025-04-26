@@ -18,11 +18,11 @@ export default function LogInScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <View style={styles.imageContainer}>
                 <Image
-                    source={require("./assets/supabase-logo-icon.png")}
+                    source={require("../assets/supabase-logo-icon.png")}
                     style={styles.image}
                 />
                 <Image
-                    source={require("./assets/react-svgrepo-com.png")}
+                    source={require("../assets/react-svgrepo-com.png")}
                     style={styles.image}
                 />
             </View>
