@@ -2,9 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LogInScreen from "../Screens/LogInScreen";
 import SignUpScreen from "../Screens/SignUpScreen";
-import CatEstadosScreen from "../Screens/CatEstadosScreen";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import WelcomeScreen from "../Screens/WelcomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +23,11 @@ export default function AppNavigator() {
     };
   }, []);
 
+  const SignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) console.log("Error signing out:", error.message);
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -31,7 +36,7 @@ export default function AppNavigator() {
         }}
       >
         {session ? (
-          <Stack.Screen name='CatEstados' component={CatEstadosScreen} />
+          <Stack.Screen name='Welcome' component={WelcomeScreen} />
         ) : (
           <>
             <Stack.Screen name='LogIn' component={LogInScreen} />
