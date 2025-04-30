@@ -56,8 +56,7 @@ const supabaseAnonKey = "TUPUBLICANONKEY";
 ## 🧪 Test rápido
 
 - Registra un usuario
-- Agrega una imagen
-- Elimina las existentes
+- Inicia sesión
 - Cierra sesión y vuelve a entrar
 
 ---
