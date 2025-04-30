@@ -23,11 +23,6 @@ export default function AppNavigator() {
     };
   }, []);
 
-  const SignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) console.log("Error signing out:", error.message);
-  };
-
   return (
     <NavigationContainer>
       <Stack.Navigator
